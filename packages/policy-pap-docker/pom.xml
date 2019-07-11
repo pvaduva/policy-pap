@@ -42,6 +42,8 @@
         <docker.skip.push>false</docker.skip.push>
         <docker.pull.registry>nexus3.onap.org:10001</docker.pull.registry>
         <docker.push.registry>nexus3.onap.org:10003</docker.push.registry>
+        <docker.user>onapmulti</docker.user>
+        <docker.pass>Secret1234</docker.pass>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
@@ -90,9 +92,13 @@
                     <pullRegistry>${docker.pull.registry}</pullRegistry>
                     <pushRegistry>${docker.push.registry}</pushRegistry>
 
+                    <authConfig>
+                        <username>${docker.user}</username>
+                        <password>${docker.pass}</password>
+                    </authConfig>
                     <images>
                         <image>
-                            <name>onap/policy-pap</name>
+                            <name>policy-pap-${os.arch}</name>
                             <build>
                                 <cleanup>try</cleanup>
                                 <dockerFile>Dockerfile</dockerFile>
